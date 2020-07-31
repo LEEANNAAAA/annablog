@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.oz.board.BoaDao">
+
+<resultMap type="BoaVo" id="BoaMap">
+	<id property="boaNo" column="boaNo" />
+	<result property="boaTitle" column="boaTitle" />
+	<result property="boaContent" column="boaContent" />
+	<result property="boaDate" column="boaDate" />
+	<result property="boaId" column="boaId" />
+
+</resultMap>
+
+  <select id="selectBoaList" resultType="BoaVo">
+  	SELECT boa_no, boa_title, boa_date, boa_id
+  	From board
+  </select>
+  
+  <select id="selectBoa" parameterType="int" resultType="BoaVo">
+  	SELECT boa_no, boa_title, boa_content, boa_date, boa_id
+  	FROM board
+  	WHERE boa_no = #{boaNo}
+  </select>
+  
+  <insert id="insertBoa" parameterType="BoaVo" >
+  	INSERT INTO board (boa_no, boa_title, boa_content, boa_id)
+	VALUES (seq_boa_no.NEXTVAL,#{boaTitle},#{boaContent},#{boaId})
+  </insert>
+  
+  <update id="updateBoa" parameterType="BoaVo">
+  	UPDATE board
+  	SET  boa_title=#{boaTitle}, boa_content=#{boaContent} 
+  	WHERE boa_no=#{boaNo}
+
+  </update>
+  
+  <delete id="deleteBoa" parameterType="int">
+  	DELETE FROM board 
+  	WHERE boa_no=#{boaNo}
+  </delete>
+  
+  
+</mapper>

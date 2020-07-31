@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<!-- _ 표기법을 사용한 컬럼이름을 낙타표기법을 사용한 자바 변수이름과 맵핑하는 기능 -->
+ 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+ 	</settings>
+
+	<typeAliases>
+		<!-- 마이바티스 설정 파일에서 kr.ac.kopo.member.MemberVo를 MemberVo로 줄여서 사용 -->
+		<typeAlias type="kr.ac.oz.member.MemberVo" alias="MemberVo" />
+		<typeAlias type="kr.ac.oz.board.BoaVo" alias="BoaVo" />
+		<typeAlias type="kr.ac.oz.board.AttachVo" alias="AttachVo" />
+		<typeAlias type="kr.ac.oz.free_travel.FreeVo" alias="FreeVo" />
+		<typeAlias type="kr.ac.oz.pack_travel.PackVo" alias="PackVo" />
+		<typeAlias type="kr.ac.oz.reply.ReplyVo" alias="ReplyVo" />
+<!-- 		<typeAlias type="kr.ac.kopo.student.StudentVo" alias="StudentVo" /> -->
+	</typeAliases>
+
+  <environments default="development">
+<!--   	마이바티스를 통해서 사용하려는 데이터베이스 환경(접속정보)을 설정 -->
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="oracle.jdbc.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+        <property name="username" value="ohjo"/>
+        <property name="password" value="ohjo"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+<!--   	마이바티스를 통해서 실행할 SQL문들을 정의한 XML 파일 등록 -->
+    <mapper resource="batis/mapper/MemberMapper.xml"/>
+    <mapper resource="batis/mapper/BoaMapper.xml"/>
+    <mapper resource="batis/mapper/AttachMapper.xml"/>
+    <mapper resource="batis/mapper/FreeMapper.xml"/>
+    <mapper resource="batis/mapper/PackMapper.xml"/>
+    <mapper resource="batis/mapper/ReplyMapper.xml"/>
+<!--     <mapper resource="batis/mapper/StudentMapper.xml"/> -->
+  </mappers>
+</configuration>

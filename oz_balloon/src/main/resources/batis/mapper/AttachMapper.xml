@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ac.oz.board.AttachDao">
+
+<resultMap type="BoaVo" id="BoaMap">
+	<id property="boaNo" column="boaNo" />
+	<result property="boaTitle" column="boaTitle" />
+	<result property="boaContent" column="boaContent" />
+	<result property="boaDate" column="boaDate" />
+	<result property="boaId" column="boaId" />
+
+</resultMap>
+
+  <select id="selectBoaList" resultType="BoaVo">
+  	SELECT att_no, att_org_name, att_new_name, att_boa_no
+  	From attach
+  </select>
+  
+  <select id="selectBoa" parameterType="int" resultType="BoaVo">
+  	SELECT att_no, att_org_name, att_new_name, att_boa_no
+  	FROM attach 
+  	WHERE boa_no = #{boaNo}
+  </select>
+  
+  <insert id="insertAttach" parameterType="AttachVo" >
+  	INSERT INTO attach 
+  	(att_no, att_org_name, att_new_name, att_boa_no)
+	VALUES (seq_att_no.nextval,#{attOrgName},#{attNewName},#{attBoaNo})
+  </insert>
+  
+
+</mapper>

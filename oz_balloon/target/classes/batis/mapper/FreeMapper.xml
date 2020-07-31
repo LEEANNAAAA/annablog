@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.oz.free_travel.FreeDao">
+
+
+<resultMap type="FreeVo" id="FreeMap">
+	
+		<id property="freeNo" column="free_no" />
+		<result property="freeId" column="free_id" />
+		<result property="freeTitle" column="free_title " />
+		<result property="freeContent" column="free_content" />
+		<result property="freePrice" column="free_price" />
+		
+	</resultMap>
+
+  <select id="selectFreeList" resultType="FreeVo">
+  	SELECT * from free_travel
+  </select>
+  
+  <select id="selectFree" parameterType="int" resultType="FreeVo">
+  	SELECT free_no, free_title, free_content, free_id, free_price
+  	FROM free_travel
+  	WHERE free_no = #{freeNo}
+  </select>
+  
+  <insert id="insertFree" parameterType="FreeVo" >
+  	INSERT INTO free_travel (free_no, free_title, free_content, free_id, free_price)
+	VALUES (seq_free_no.NEXTVAL,#{freeTitle},#{freeContent},#{freeId},#{freePrice})
+  </insert>
+  
+  <update id="updateFree" parameterType="FreeVo">
+  	UPDATE free_travel
+  	SET  free_title=#{freeTitle}, free_content=#{freeContent}, free_price=#{freePrice} 
+  	WHERE free_no=#{freeNo}
+
+  </update>
+  
+  <delete id="deleteFree" parameterType="int">
+  	DELETE FROM free_travel 
+  	WHERE free_no=#{freeNo}
+  </delete>
+  
+  
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.oz.pack_travel.PackDao">
+
+
+<resultMap type="PackVo" id="PackMap">
+	
+		<id property="packNo" column="pack_no" />
+		<result property="packId" column="pack_id" />
+		<result property="packTitle" column="pack_title " />
+		<result property="packContent" column="pack_content" />
+		<result property="packPrice" column="pack_price" />
+		
+	</resultMap>
+
+  <select id="selectPackList" resultType="PackVo">
+  	SELECT * from pack_travel
+  </select>
+  
+  <select id="selectPack" parameterType="int" resultType="PackVo">
+  	SELECT pack_no, pack_title, pack_content, pack_id, pack_price
+  	FROM pack_travel
+  	WHERE pack_no = #{packNo}
+  </select>
+  
+  <insert id="insertPack" parameterType="PackVo" >
+  	INSERT INTO pack_travel (pack_no, pack_title, pack_content, pack_id, pack_price)
+	VALUES (seq_pack_no.NEXTVAL,#{packTitle},#{packContent},#{packId},#{packPrice})
+  </insert>
+  
+  <update id="updatePack" parameterType="PackVo">
+  	UPDATE pack_travel
+  	SET  pack_title=#{packTitle}, pack_content=#{packContent}, pack_price=#{packPrice} 
+  	WHERE pack_no=#{packNo}
+
+  </update>
+  
+  <delete id="deletePack" parameterType="int">
+  	DELETE FROM pack_travel 
+  	WHERE pack_no=#{packNo}
+  </delete>
+  
+  
+</mapper>
